@@ -22,6 +22,7 @@ public class ProductDTO {
 	int price;
 	String color;
 	String content;
+	String seller;
 	LocalDateTime regDate;
 	LocalDateTime modDate;
 

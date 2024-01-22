@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
 
 	<th:block th:fragment="content">
 	
@@ -20,7 +20,9 @@
 				<!-- Product actions-->
 				<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 					<div class="text-center">
-						<a class="btn btn-outline-dark mt-auto" href="#">상품등록</a> 
+						<div class="text-center">
+						<a class="btn btn-outline-dark mt-auto" th:href="@{/board/register}">상품등록</a>
+					</div>
 					</div>
 				</div>
 			</div>
@@ -43,7 +45,7 @@
 				<!-- Product actions-->
 				<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 					<div class="text-center">
-						<a class="btn btn-outline-dark mt-auto" href="#">[[${dto.productName}]]</a>
+						<a class="btn btn-outline-dark mt-auto" th:href="@{/board/read}">[[${dto.productName}]]</a>
 					</div>
 				</div>
 			</div>

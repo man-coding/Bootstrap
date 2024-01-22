@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
 
-</body>
-</html>
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+	<th:block th:fragment="content">
+
+
+		<div th:action="@{/board/register}" th:method="post"
+			class="input-group mb-3">
+			<span class="input-group-text">상품명</span> <input type="text"
+				class="form-control"  aria-label="productName">
+		</div>
+
+		<div class="input-group mb-3">
+			<span class="input-group-text">가격</span> <input type="text"
+				class="form-control"  aria-label="price">
+		</div>
+
+		<div class="input-group mb-3">
+			<span class="input-group-text">\</span> <input type="text"
+				class="form-control"  aria-label="color">
+		</div>
+
+		<div class="input-group mb-3">
+			<span class="input-group-text">상품설명</span>
+			<textarea class="form-control" aria-label="content"></textarea>
+		</div>
+
+		<div class="input-group mb-3">
+			<span class="input-group-text">판매자</span> <input type="text"
+				class="form-control" placeholder="판매자" aria-label="seller">
+		</div>
+
+		<button type="submit" class="btn btn-primary">등록</button>
+	</th:block>
+
+</th:block>

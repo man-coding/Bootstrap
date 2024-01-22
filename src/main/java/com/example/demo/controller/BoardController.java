@@ -31,12 +31,12 @@ public class BoardController {
 		List<ProductDTO> list = service.getList();
 		model.addAttribute("list", list);
 	}
-
+	//등록화면
 	@GetMapping("/register")
 	public void register() {
 
 	}
-
+	//등록처리
 	@PostMapping("/register")
 	public String registerPost(ProductDTO dto, RedirectAttributes redirectAttributes) {
 

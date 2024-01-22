@@ -41,4 +41,7 @@ public class Product {
 	@Column(length = 255, nullable = false)
 	String content;
 
+	@Column(length = 10, nullable = false)
+	String seller;
+
 }
