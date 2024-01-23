@@ -1,10 +1,99 @@
 <!DOCTYPE html>
-<html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
 
-</body>
-</html>
+
+<style>
+</style>
+
+</head>
+
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+	<th:block th:fragment="content">
+
+
+
+		<form th:action="@{/board/modify}" th:method="post">
+
+
+
+			<div class="input-group mb-3">
+				<span class="input-group-text">상품명</span> <input type="text"
+					class="form-control" name="productName"
+					th:value="${dto.productName}" aria-label="productName">
+			</div>
+
+			<div class="input-group mb-3">
+				<span class="input-group-text">\</span> <input type="text"
+					class="form-control" name="price" th:value="${dto.price}"
+					aria-label="price">
+			</div>
+
+			<div class="input-group mb-3">
+				<span class="input-group-text">색상</span> <input type="text"
+					class="form-control" name="color" th:value="${dto.color}"
+					aria-label="color">
+			</div>
+
+			<div class="input-group mb-3">
+				<span class="input-group-text">상품설명</span>
+				<textarea class="form-control" name="content"
+					th:value="${dto.content}" aria-label="content"></textarea>
+			</div>
+
+			<div class="input-group mb-3">
+				<input type="file" class="form-control" id="inputGroupFile01">
+				<label class="input-group-text" for="inputGroupFile01">상품이미지</label>
+			</div>
+
+			<div class="input-group mb-3">
+				<span class="input-group-text">판매자</span> <input type="text"
+					class="form-control" name="seller" th:value="${dto.seller}"
+					aria-label="seller" readonly>
+			</div>
+
+	    <button type="button" class="btn btn-primary modifyBtn">수정하기</button>
+
+		<button type="button" class="btn btn-info listBtn">목록</button>
+
+		<button type="button" class="btn btn-danger removeBtn">삭제</button>
+		
+		
+		</form>
+		<script th:inline = "javascript">
+		
+		var form = $("form")
+		$(".modifyBtn").click(function() {
+			
+			if(!confirm("수정하시겠습니까?")){
+				return;
+			}
+			
+			form.attr("action","/board/modify")
+				.attr("method","post")
+				.submit();
+			
+		});
+		
+		$(".listBtn").click(function() {
+			
+			form
+			.attr("action","/board/list")
+			.attr("method","get")
+			.submit
+			
+		});
+		
+		$(".removeBtn").click(function() {
+			
+			form
+			.attr("action","/board/remove")
+			.attr("method","post")
+			.submit();
+			
+		});
+		
+		</script>
+	</th:block>
+
+</th:block>

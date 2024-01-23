@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dto.ProductDTO;
@@ -31,12 +32,14 @@ public class BoardController {
 		List<ProductDTO> list = service.getList();
 		model.addAttribute("list", list);
 	}
-	//등록화면
+
+	// 등록화면
 	@GetMapping("/register")
 	public void register() {
 
 	}
-	//등록처리
+
+	// 등록처리
 	@PostMapping("/register")
 	public String registerPost(ProductDTO dto, RedirectAttributes redirectAttributes) {
 
@@ -45,5 +48,25 @@ public class BoardController {
 		redirectAttributes.addFlashAttribute("msg", no);
 
 		return "redirect:/board/list";
+	}
+
+	@GetMapping("/read")
+	public void read(@RequestParam("productName") String productName, Model model) {
+		ProductDTO dto = service.read(productName);
+		model.addAttribute("dto", dto);
+	}
+
+	@GetMapping("/modify")
+	public void modify(@RequestParam("productName") String productName, Model model) {
+		ProductDTO dto = service.read(productName);
+		model.addAttribute("dto", dto);
+	}
+
+	@PostMapping("/modify")
+	public String modifyPost(ProductDTO dto, RedirectAttributes redirectAttributes) {
+		service.modify(dto);
+		redirectAttributes.addAttribute("productName", dto.getProductName());
+		return "redirect:/board/read";
+
 	}
 }

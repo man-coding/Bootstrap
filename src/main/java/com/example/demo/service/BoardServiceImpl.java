@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,35 @@ public class BoardServiceImpl implements BoardService {
 		}
 
 		return list;
+	}
+
+	@Override
+	public ProductDTO read(String productName) {
+		Optional<Product> result = repository.findByProductName(productName);
+
+		if (result.isPresent()) {
+			Product product = result.get();
+
+			ProductDTO dto = entityToDto(product);
+			return dto;
+		}
+		return null;
+	}
+
+	@Override
+	public void modify(ProductDTO dto) {
+		Optional<Product> result = repository.findByProductName(dto.getProductName());
+		if (result.isPresent()) {
+			Product entity = result.get();
+
+			entity.setProductName(dto.getProductName());
+			entity.setPrice(dto.getPrice());
+			entity.setColor(dto.getColor());
+			entity.setContent(dto.getContent());
+			entity.setSeller(dto.getSeller());
+
+			repository.save(entity);
+		}
 	}
 
 }

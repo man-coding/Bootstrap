@@ -1,10 +1,74 @@
 <!DOCTYPE html>
-<html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
 
-</body>
-</html>
+<style>
+
+span{
+	width: 95px;
+}
+
+</style>
+
+</head>
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+	<th:block th:fragment="content">
+
+
+
+
+
+
+
+		<div class="input-group mb-3">
+			<span class="input-group-text">상품명</span> <input type="text"
+				class="form-control" th:value="${dto.productName}" readonly>
+		</div>
+
+		<div class="input-group mb-3">
+			<span class="input-group-text">\</span> <input type="text"
+				class="form-control" th:value="${dto.price}" readonly>
+		</div>
+
+		<div class="input-group mb-3">
+			<span class="input-group-text">색상</span> <input type="text"
+				class="form-control" th:value="${dto.color}" readonly>
+		</div>
+
+		<div class="input-group mb-3">
+			<span class="input-group-text">상품설명</span>
+			<textarea class="form-control" row="5">[[${dto.content}]]</textarea>
+		</div>
+
+		<div class="input-group mb-3">
+			<input type="file" class="form-control" id="inputGroupFile01">
+			<label class="input-group-text" for="inputGroupFile01" readonly>상품이미지</label>
+		</div>
+
+		<div class="input-group mb-3">
+			<span class="input-group-text">판매자</span> <input type="text"
+				class="form-control" th:value="${dto.seller}" readonly>
+		</div>
+
+		<div class="form-group">
+			<label>등록일</label> <input type="text" class="form-control"
+				th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd')}"
+				readonly>
+		</div>
+		
+		<div class="form-group">
+			<label>수정일</label> <input type="text" class="form-control"
+				th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd')}"
+				readonly>
+		</div>
+		
+		<a th:href="@{/board/modify(productName = ${dto.productName})}">
+        	<button type="button" class="btn btn-primary">수정하기</button>
+        </a>
+
+        <a th:href="@{/board/list}">
+        	<button type="button" class="btn btn-info">목록</button>
+        </a>
+	</th:block>
+
+</th:block>
