@@ -49,23 +49,21 @@
 				<!-- Product actions-->
 				<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 					<div class="text-center">
-						<a class="btn btn-outline-dark mt-auto" th:href="@{/board/read(productName=${dto.productName})}">[[${dto.productName}]]</a>
+						<a class="btn btn-outline-dark mt-auto"
+							th:href="@{/board/read(no=${dto.no})}">[[${dto.productName}]]</a>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		</tbody>
-		</table>
-
 		<script th:inline="javascript">
 			
 			$(document).ready(function(){
-				
+				console.log("asdasd");
 				var msg = [[${msg}]];
 				
 				if(msg != null){
-					alert(msg + "번 상품이 등록되었습니다.")
+					alert(msg + "번 상품이 등록되었습니다.");
 				}
 				});
 			

@@ -37,7 +37,7 @@ span{
 
 		<div class="input-group mb-3">
 			<span class="input-group-text">상품설명</span>
-			<textarea class="form-control" row="5">[[${dto.content}]]</textarea>
+			<textarea class="form-control" rows="5" readonly>[[${dto.content}]]</textarea>
 		</div>
 
 		<div class="input-group mb-3">
@@ -62,7 +62,7 @@ span{
 				readonly>
 		</div>
 		
-		<a th:href="@{/board/modify(productName = ${dto.productName})}">
+		<a th:href="@{/board/modify(no = ${dto.no})}">
         	<button type="button" class="btn btn-primary">수정하기</button>
         </a>
 

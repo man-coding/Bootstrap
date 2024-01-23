@@ -14,8 +14,8 @@ public interface BoardService {
 	List<ProductDTO> getList();
 
 	// 게시물 상세조회
-	ProductDTO read(String productName);
-	
+	ProductDTO read(int no);
+
 	// 게시물 수정
 	void modify(ProductDTO dto);
 
@@ -30,7 +30,7 @@ public interface BoardService {
 	default ProductDTO entityToDto(Product entity) {
 		ProductDTO dto = ProductDTO.builder().no(entity.getNo()).productName(entity.getProductName())
 				.price(entity.getPrice()).color(entity.getColor()).content(entity.getContent())
-				.seller(entity.getSeller()).build();
+				.seller(entity.getSeller()).regDate(entity.getRegDate()).modDate(entity.getModDate()).build();
 
 		return dto;
 	}

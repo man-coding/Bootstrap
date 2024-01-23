@@ -47,8 +47,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public ProductDTO read(String productName) {
-		Optional<Product> result = repository.findByProductName(productName);
+	public ProductDTO read(int no) {
+		Optional<Product> result = repository.findById(no);
 
 		if (result.isPresent()) {
 			Product product = result.get();
@@ -61,7 +61,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void modify(ProductDTO dto) {
-		Optional<Product> result = repository.findByProductName(dto.getProductName());
+		Optional<Product> result = repository.findById(dto.getNo());
 		if (result.isPresent()) {
 			Product entity = result.get();
 
@@ -74,5 +74,8 @@ public class BoardServiceImpl implements BoardService {
 			repository.save(entity);
 		}
 	}
+
+
+	
 
 }

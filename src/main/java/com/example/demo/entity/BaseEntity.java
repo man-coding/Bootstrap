@@ -1,7 +1,6 @@
 package com.example.demo.entity;
 
-import java.time.LocalDateTime;
-
+import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -9,11 +8,19 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-@MappedSuperclass // 테이블로 생성한다.
+import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.MappedSuperclass;
+import java.time.LocalDateTime;
+
+@MappedSuperclass // 테이블로 생성하지 않음.
 @EntityListeners(value = { AuditingEntityListener.class }) // 엔티티의 변화
 @Getter
-public abstract class BaseEntity {
+abstract class BaseEntity { 
 
 	@CreatedDate
 	LocalDateTime regDate;
