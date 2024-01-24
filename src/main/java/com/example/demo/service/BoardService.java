@@ -18,6 +18,8 @@ public interface BoardService {
 
 	// 게시물 수정
 	void modify(ProductDTO dto);
+	
+	int remove(int no);
 
 	// dto -> entity 변환 메소드
 	default Product dtoToEntity(ProductDTO dto) {

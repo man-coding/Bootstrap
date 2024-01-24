@@ -7,7 +7,10 @@
 
 		<form>
 
-
+			<div class="form-group">
+				<input type="hidden" class="form-control" name="no"
+					th:value="${dto.no}" readonly>
+			</div>
 
 			<div class="input-group mb-3">
 				<span class="input-group-text">상품명</span> <input type="text"
@@ -43,7 +46,7 @@
 					class="form-control" name="seller" th:value="${dto.seller}"
 					aria-label="seller" readonly>
 			</div>
-			
+
 			<div class="form-group">
 				<label>등록일</label> <input type="text" class="form-control"
 					th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}"
@@ -57,11 +60,13 @@
 
 		</form>
 
-		<button type="button" class="btn btn-primary modifyBtn">수정하기</button>
-
-		<button type="button" class="btn btn-info listBtn">목록</button>
+		<button type="button" class="btn btn-primary modifyBtn">수정</button>
 
 		<button type="button" class="btn btn-danger removeBtn">삭제</button>
+		
+		<button type="button" class="btn btn-info listBtn">목록</button>
+		
+		
 
 		<script th:inline="javascript">
 			//$() 함수: CSS선택자로 HTML 태그를 가져온다
@@ -73,7 +78,6 @@
 			//[취소]를 선택하면 이벤트를 종료한다.
 			$(".modifyBtn").click(
 					function() {
-					console.log('asd');
 						if (!confirm("수정하시겠습니까?")) {
 							return;
 						}
@@ -89,9 +93,11 @@
 						form.attr("action", "/board/list")
 								.attr("method", "get").submit();
 					})
-
 			$(".removeBtn").click(
 					function() {
+						if (!confirm("삭제하시겠습니까?")) {
+							return;
+						}
 						form.attr("action", "/board/remove").attr("method",
 								"post").submit();
 					});

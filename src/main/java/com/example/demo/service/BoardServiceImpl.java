@@ -69,13 +69,21 @@ public class BoardServiceImpl implements BoardService {
 			entity.setPrice(dto.getPrice());
 			entity.setColor(dto.getColor());
 			entity.setContent(dto.getContent());
-			entity.setSeller(dto.getSeller());
 
 			repository.save(entity);
 		}
 	}
 
-
-	
+	@Override
+	public int remove(int no) {
+		Optional<Product> result = repository.findById(no);
+		if(result.isPresent()){
+			repository.deleteById(no);
+			
+			return 1;//성공
+		}else {
+			return 0; //실패
+		}
+	}
 
 }

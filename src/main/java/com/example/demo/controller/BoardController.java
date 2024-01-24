@@ -20,13 +20,14 @@ public class BoardController {
 
 	@Autowired
 	BoardService service;
-	
-	//메인화면
+
+	// 메인화면
 	@GetMapping("/main")
 	public void main() {
 
 	}
-	//목록화면
+
+	// 목록화면
 	@GetMapping("/list")
 	public void list(Model model) {
 
@@ -50,26 +51,33 @@ public class BoardController {
 
 		return "redirect:/board/list";
 	}
-	
-	//상세화면
+
+	// 상세화면
 	@GetMapping("/read")
 	public void read(@RequestParam(name = "no") int no, Model model) {
 		ProductDTO dto = service.read(no);
 		model.addAttribute("dto", dto);
 	}
-	//수정화면
+
+	// 수정화면
 	@GetMapping("/modify")
 	public void modify(@RequestParam(name = "no") int no, Model model) {
 		ProductDTO dto = service.read(no);
 		model.addAttribute("dto", dto);
 	}
-	
-	//수정처리
+
+	// 수정처리
 	@PostMapping("/modify")
 	public String modifyPost(ProductDTO dto, RedirectAttributes redirectAttributes) {
 		service.modify(dto);
 		redirectAttributes.addAttribute("no", dto.getNo());
 		return "redirect:/board/read";
 
+	}
+
+	@PostMapping("/remove")
+	public String removePost(@RequestParam(name = "no") int no) {
+		service.remove(no);
+		return "redirect:/board/list";
 	}
 }

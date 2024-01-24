@@ -32,6 +32,24 @@ public class BoardServiceTest {
 		for (ProductDTO dto : list) {
 			System.out.println(dto);
 		}
-
 	}
+
+	@Test
+	public void 상품단건조회() {
+		ProductDTO dto = service.read(1);
+		System.out.println(dto);
+	}
+
+	@Test
+	public void 상품수정() {
+		ProductDTO dto = service.read(1);
+		dto.setContent("내용이수정되었습니다~");
+		service.modify(dto);
+	}
+
+	@Test
+	public void 상품삭제() {
+		service.remove(1);
+	}
+
 }
