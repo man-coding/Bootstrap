@@ -63,27 +63,20 @@
 		<button type="button" class="btn btn-primary modifyBtn">수정</button>
 
 		<button type="button" class="btn btn-danger removeBtn">삭제</button>
-		
+
 		<button type="button" class="btn btn-info listBtn">목록</button>
-		
-		
+
+
 
 		<script th:inline="javascript">
-			//$() 함수: CSS선택자로 HTML 태그를 가져온다
-			var form = $("form"); //form 태그 객체 가져오기
+			var form = $("form");
 
-			//click() 메소드 : 수정버튼을 클릭하면 특정코드를 수행한다
-			//confirm() 메소드: 수정여부를 확인하는 창을 띄운다.
-			//[확인]을 클릭하면, 서버에 게시물 수정을 요청한다.
-			//[취소]를 선택하면 이벤트를 종료한다.
 			$(".modifyBtn").click(
 					function() {
 						if (!confirm("수정하시겠습니까?")) {
 							return;
 						}
 
-						//form~attr~submit: 서버에 게시물 수정 요청
-						//폼태그는 PUT방식을 사용할 수 없으므로, POST방식으로 처리
 						form.attr("action", "/board/modify").attr("method",
 								"post").submit();
 					});
