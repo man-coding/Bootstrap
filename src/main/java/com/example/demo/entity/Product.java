@@ -44,6 +44,9 @@ public class Product extends BaseEntity {
 	@Column(length = 10, nullable = false)
 	String seller;
 
+	@Column(length = 100, nullable = true)
 	String fileName;
+	
+	@Column(length = 100, nullable = true)
 	String filePath;
 }

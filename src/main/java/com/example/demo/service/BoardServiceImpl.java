@@ -23,31 +23,29 @@ public class BoardServiceImpl implements BoardService {
 	ProductRepository repository;
 
 	@Override
-	public int register(ProductDTO dto, MultipartFile file){
+	public int register(ProductDTO dto, MultipartFile file) {
 
-		String filePath = "C:\\Kimminsu\\springworkspace\\Bootstrap\\src\\main\\resources\\static\\files";
+		String filePath = "C:\\uploadfile";
 
 		UUID uuid = UUID.randomUUID();
-		String originalFilename = null;
+		String originalFilename = file.getOriginalFilename();
 
-		
+		String fileName = uuid + "_" + file.getOriginalFilename();
 
+		File saveFile = new File(filePath, fileName);
 		
+		dto.setFilePath(saveFile.getPath());
+		dto.setFileName(saveFile.getName());
 
 		try {
-			String fileName = uuid + "_" + file.getOriginalFilename();
-			originalFilename = file.getOriginalFilename();
-			File saveFile = new File(filePath, fileName);
+
 			file.transferTo(saveFile);
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		
+
 		Product entity = dtoToEntity(dto);
 
 		repository.save(entity);
@@ -98,7 +96,7 @@ public class BoardServiceImpl implements BoardService {
 			entity.setColor(dto.getColor());
 			entity.setContent(dto.getContent());
 			entity.setFileName(dto.getFileName());
-			
+
 			String projectPath = System.getProperty("user.dir") + "\\src\\main\resources\\static\\files";
 
 			UUID uuid = UUID.randomUUID();

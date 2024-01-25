@@ -26,7 +26,7 @@ public interface BoardService {
 	// dto -> entity 변환 메소드
 	default Product dtoToEntity(ProductDTO dto) {
 		Product entity = Product.builder().no(dto.getNo()).productName(dto.getProductName()).price(dto.getPrice())
-				.color(dto.getColor()).content(dto.getContent()).seller(dto.getSeller()).build();
+				.color(dto.getColor()).content(dto.getContent()).seller(dto.getSeller()).fileName(dto.getFileName()).filePath(dto.getFilePath()).build();
 		return entity;
 	}
 
