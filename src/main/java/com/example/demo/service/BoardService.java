@@ -2,13 +2,15 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.example.demo.dto.ProductDTO;
 import com.example.demo.entity.Product;
 
 public interface BoardService {
 
 	// 게시물 등록
-	int register(ProductDTO dto);
+	int register(ProductDTO dto , MultipartFile file);
 
 	// 게시물 목록조회
 	List<ProductDTO> getList();

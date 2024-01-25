@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+
+
 <head>
 
-
 <style>
-span {
+.input-group-text {
 	width: 95px;
 }
 </style>
@@ -11,17 +12,20 @@ span {
 </head>
 
 
+
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
 	<th:block th:fragment="content">
 
 
 
-		<form th:action="@{/board/register}" th:method="post">
+
+		<form class="input-group mb-3" th:action="@{/board/register}"
+			th:method="post">
 
 
 
 			<div class="input-group mb-3">
-				<span class="input-group-text">상품명</span> <input type="text"
+				<span class="input-group-text">상품명</span><input type="text"
 					class="form-control" name="productName" aria-label="productName">
 			</div>
 
@@ -37,11 +41,12 @@ span {
 
 			<div class="input-group mb-3">
 				<span class="input-group-text">상품설명</span>
-				<textarea class="form-control" name="content" aria-label="content"></textarea>
+				<textarea class="form-control" rows="10" name="content"
+					aria-label="content"></textarea>
 			</div>
 
 			<div class="input-group mb-3">
-				
+
 				<input type="file" class="form-control" id="inputGroupFile01">
 
 			</div>
@@ -51,7 +56,9 @@ span {
 					class="form-control" name="seller" aria-label="seller">
 			</div>
 
-			<button type="submit" class="btn btn-primary">등록</button>
+			<div class="input-group mb-3">
+				<button type="submit" class="btn btn-primary">등록</button>
+			</div>
 		</form>
 	</th:block>
 

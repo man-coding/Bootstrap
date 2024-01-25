@@ -1,11 +1,15 @@
 package com.example.demo.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.ProductDTO;
 import com.example.demo.entity.Product;
@@ -18,7 +22,26 @@ public class BoardServiceImpl implements BoardService {
 	ProductRepository repository;
 
 	@Override
-	public int register(ProductDTO dto) {
+	public int register(ProductDTO dto, MultipartFile file) {
+
+		String projectPath = System.getProperty("user.dir") + "\\src\\main\resources\\static\\files";
+
+		UUID uuid = UUID.randomUUID();
+
+		String fileName = uuid + "file.getOriginalFilename()";
+
+		File saveFile = new File(projectPath, "name");
+
+		try {
+			file.transferTo(saveFile);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
 
 		Product entity = dtoToEntity(dto);
 
@@ -77,12 +100,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int remove(int no) {
 		Optional<Product> result = repository.findById(no);
-		if(result.isPresent()){
+		if (result.isPresent()) {
 			repository.deleteById(no);
-			
-			return 1;//성공
-		}else {
-			return 0; //실패
+
+			return 1;// 성공
+		} else {
+			return 0; // 실패
 		}
 	}
 

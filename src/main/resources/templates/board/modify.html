@@ -17,7 +17,7 @@ span {
 
 
 
-		<form>
+		<form class="input-group mb-3">
 
 			<div class="form-group">
 				<input type="hidden" class="form-control" name="no"
@@ -44,7 +44,7 @@ span {
 
 			<div class="input-group mb-3">
 				<span class="input-group-text">상품설명</span>
-				<textarea class="form-control" name="content"
+				<textarea class="form-control" rows = "10" name="content"
 					th:value="${dto.content}" aria-label="content"></textarea>
 			</div>
 
@@ -59,20 +59,24 @@ span {
 					aria-label="seller" readonly>
 			</div>
 
-			<div class="form-group">
-				<label>등록일</label> <input type="text" class="form-control"
+			<div class="input-group mb-3">
+				<span class="input-group-text">등록일</span> <input type="text"
+					class="form-control"
 					th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd')}" readonly>
 			</div>
-			<div class="form-group">
-				<label>수정일</label> <input type="text" class="form-control"
+			<div class="input-group mb-3">
+				<span class="input-group-text">수정일</span> <input type="text"
+					class="form-control"
 					th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd')}" readonly>
 			</div>
 
-			<button type="button" class="btn btn-primary modifyBtn">수정</button>
+			<div class="input-group mb-3">
+				<button type="button" class="btn btn-primary modifyBtn">수정</button>
 
-			<button type="button" class="btn btn-danger removeBtn">삭제</button>
+				<button type="button" class="btn btn-danger removeBtn">삭제</button>
 
-			<button type="button" class="btn btn-info listBtn">목록</button>
+				<button type="button" class="btn btn-info listBtn">목록</button>
+			</div>
 		</form>
 
 
