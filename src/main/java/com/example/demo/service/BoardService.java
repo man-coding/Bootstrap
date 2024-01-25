@@ -10,7 +10,7 @@ import com.example.demo.entity.Product;
 public interface BoardService {
 
 	// 게시물 등록
-	int register(ProductDTO dto , MultipartFile file);
+	int register(ProductDTO dto, MultipartFile file);
 
 	// 게시물 목록조회
 	List<ProductDTO> getList();
@@ -19,8 +19,8 @@ public interface BoardService {
 	ProductDTO read(int no);
 
 	// 게시물 수정
-	void modify(ProductDTO dto);
-	
+	void modify(ProductDTO dto, MultipartFile file);
+
 	int remove(int no);
 
 	// dto -> entity 변환 메소드
@@ -38,4 +38,5 @@ public interface BoardService {
 
 		return dto;
 	}
+
 }

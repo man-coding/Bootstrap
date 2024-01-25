@@ -23,6 +23,8 @@ public class ProductDTO {
 	String color;
 	String content;
 	String seller;
+	String fileName;
+	String filePath;
 	LocalDateTime regDate;
 	LocalDateTime modDate;
 

@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.ProductDTO;
 
@@ -20,7 +21,8 @@ public class BoardServiceTest {
 		ProductDTO dto = ProductDTO.builder().productName("로지텍키보드").price(96000).color("블랙").content("k855 무선 키보드입니다")
 				.build();
 
-		int no = service.register(dto);
+		MultipartFile file = null;
+		int no = service.register(dto,file);
 		System.out.println(no);
 
 	}
@@ -44,7 +46,8 @@ public class BoardServiceTest {
 	public void 상품수정() {
 		ProductDTO dto = service.read(1);
 		dto.setContent("내용이수정되었습니다~");
-		service.modify(dto);
+		MultipartFile file = null;
+		service.modify(dto,file);
 	}
 
 	@Test

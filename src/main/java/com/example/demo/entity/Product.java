@@ -12,7 +12,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tbl_product")
@@ -45,4 +44,6 @@ public class Product extends BaseEntity {
 	@Column(length = 10, nullable = false)
 	String seller;
 
+	String fileName;
+	String filePath;
 }

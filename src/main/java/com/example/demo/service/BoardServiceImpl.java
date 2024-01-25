@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.ProductDTO;
@@ -22,17 +23,21 @@ public class BoardServiceImpl implements BoardService {
 	ProductRepository repository;
 
 	@Override
-	public int register(ProductDTO dto, MultipartFile file) {
+	public int register(ProductDTO dto, MultipartFile file){
 
-		String projectPath = System.getProperty("user.dir") + "\\src\\main\resources\\static\\files";
+		String filePath = "C:\\Kimminsu\\springworkspace\\Bootstrap\\src\\main\\resources\\static\\files";
 
 		UUID uuid = UUID.randomUUID();
+		String originalFilename = null;
 
-		String fileName = uuid + "file.getOriginalFilename()";
+		
 
-		File saveFile = new File(projectPath, "name");
+		
 
 		try {
+			String fileName = uuid + "_" + file.getOriginalFilename();
+			originalFilename = file.getOriginalFilename();
+			File saveFile = new File(filePath, fileName);
 			file.transferTo(saveFile);
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
@@ -42,7 +47,7 @@ public class BoardServiceImpl implements BoardService {
 		
 		
 		
-
+		
 		Product entity = dtoToEntity(dto);
 
 		repository.save(entity);
@@ -83,7 +88,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void modify(ProductDTO dto) {
+	public void modify(ProductDTO dto, @RequestParam("file") MultipartFile file) {
 		Optional<Product> result = repository.findById(dto.getNo());
 		if (result.isPresent()) {
 			Product entity = result.get();
@@ -92,6 +97,23 @@ public class BoardServiceImpl implements BoardService {
 			entity.setPrice(dto.getPrice());
 			entity.setColor(dto.getColor());
 			entity.setContent(dto.getContent());
+			entity.setFileName(dto.getFileName());
+			
+			String projectPath = System.getProperty("user.dir") + "\\src\\main\resources\\static\\files";
+
+			UUID uuid = UUID.randomUUID();
+
+			String fileName = uuid + "file.getOriginalFilename()";
+
+			File saveFile = new File(projectPath, fileName);
+
+			try {
+				file.transferTo(saveFile);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 
 			repository.save(entity);
 		}
