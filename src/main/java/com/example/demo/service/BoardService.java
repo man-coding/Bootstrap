@@ -26,16 +26,19 @@ public interface BoardService {
 	// dto -> entity 변환 메소드
 	default Product dtoToEntity(ProductDTO dto) {
 		Product entity = Product.builder().no(dto.getNo()).productName(dto.getProductName()).price(dto.getPrice())
-				.color(dto.getColor()).content(dto.getContent()).seller(dto.getSeller()).fileName(dto.getFileName()).filePath(dto.getFilePath()).build();
+				.color(dto.getColor()).content(dto.getContent()).seller(dto.getSeller()).fileName(dto.getFileName())
+				.filePath(dto.getFilePath()).build();
 		return entity;
+		// db에 파일패스랑 파일네임 저장되어야 하므로 받아와야 함.
 	}
 
 	// entity -> dto 변환
 	default ProductDTO entityToDto(Product entity) {
 		ProductDTO dto = ProductDTO.builder().no(entity.getNo()).productName(entity.getProductName())
 				.price(entity.getPrice()).color(entity.getColor()).content(entity.getContent())
-				.seller(entity.getSeller()).regDate(entity.getRegDate()).modDate(entity.getModDate()).build();
-
+				.seller(entity.getSeller()).regDate(entity.getRegDate()).modDate(entity.getModDate())
+				.fileName(entity.getFileName()).filePath(entity.getFilePath()).build();
+		// Product 엔티티에서 ProductDTO로 변환할 때, 엔티티에 저장된 fileName과 filePath 정보를 dto로 전달해야 함.
 		return dto;
 	}
 
