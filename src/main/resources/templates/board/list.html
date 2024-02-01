@@ -4,6 +4,8 @@
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
 
 	<th:block th:fragment="content">
+
+
 		<div class="col mb-5">
 			<div class="card h-100">
 				<!-- Product image-->
@@ -30,9 +32,11 @@
 				</div>
 			</div>
 		</div>
+
+
 		<div th:each="dto : ${list}" class="col mb-5">
 
-[[${dto.filePath}]]
+			[[${dto.filePath}]]
 			<!-- 플랫하게 확인할 때는 dto를 통째로 가져와 볼 것. -->
 
 			<div class="card h-100">
@@ -43,8 +47,8 @@
 				<!-- Product details-->
 				<div class="card-body p-4">
 					<div class="text-center">
-						<!-- Product name-->
-						<h5 th:href="@{/board/read(no=${dto.no})}" class="fw-bolder">[[${dto.no}]]</h5>
+						<!-- Product name-->                    <!--  -->
+						<h5 th:href="@{/board/read(no=${dto.no}, page=${list.number+1})}" class="fw-bolder">[[${dto.no}]]</h5>
 						<!-- Product price-->
 						[[${dto.price}]]
 					</div>
@@ -53,11 +57,36 @@
 				<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 					<div class="text-center">
 						<a class="btn btn-outline-dark mt-auto"
-							th:href="@{/board/read(no=${dto.no})}">[[${dto.productName}]]</a>
+							th:href="@{/board/read(no=${dto.no},page=${list.number+1})}">[[${dto.productName}]]</a>
 					</div>
 				</div>
 			</div>
 		</div>
+
+
+
+		<p>
+		<ul class="pagination h-100 justify-content-center align-items-center">
+			<!-- 페에지 버튼 설정 -->
+			<th:block th:each="page : ${#numbers.sequence(1, list.totalPages)}">
+				<!-- 변수: 리스트(리스트 반환하는 함수) -->
+
+				<th:block th:if="${list.number+1 == page}">
+					<li class="page-item active"><a
+						th:href="@{/board/list(page=${page})}" class="page-link">[[${page}]]</a></li>
+				</th:block>
+
+				<th:block th:unless="${list.number+1 == page}">
+					<li class="page-item"><a
+						th:href="@{/board/list(page=${page})}" class="page-link">[[${page}]]</a></li>
+				</th:block>
+
+			</th:block>
+
+		</ul>
+		</p>
+
+
 
 		<script th:inline="javascript">
 			

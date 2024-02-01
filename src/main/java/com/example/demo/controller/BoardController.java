@@ -1,9 +1,9 @@
 package com.example.demo.controller;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,11 +30,19 @@ public class BoardController {
 	}
 
 	// 목록화면
-	@GetMapping("/list")
-	public void list(Model model) {
+//	@GetMapping("/list")
+//	public void list(Model model) {
+//
+//		List<ProductDTO> list = service.getList();
+//		model.addAttribute("list", list);
+//	}
 
-		List<ProductDTO> list = service.getList();
+	@GetMapping("/list")
+	public void list(@RequestParam(defaultValue = "0", name = "page") int page, Model model) {
+
+		Page<ProductDTO> list = service.getList(page);
 		model.addAttribute("list", list);
+
 	}
 
 	// 등록화면
@@ -57,9 +65,12 @@ public class BoardController {
 
 	// 상세화면
 	@GetMapping("/read")
-	public void read(@RequestParam(name = "no") int no, Model model) {
+	public void read(@RequestParam(name = "no") int no, @RequestParam(defaultValue = "0", name = "page") int page,
+			Model model) {
 		ProductDTO dto = service.read(no);
 		model.addAttribute("dto", dto);
+		// 화며에 페이지번호 전달
+		model.addAttribute("page", page);
 	}
 
 	// 수정화면

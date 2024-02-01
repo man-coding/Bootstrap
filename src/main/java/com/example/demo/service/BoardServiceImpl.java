@@ -1,6 +1,11 @@
 package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,7 +39,7 @@ public class BoardServiceImpl implements BoardService {
 
 		if (!file.isEmpty()) {
 			String fileName = file.getOriginalFilename(); // 실제 사용 시에는 파일명 중복을 고려해야 함
-			
+
 			File saveFile = new File(webpath, fileName); // File 객체를 생성하는 명령어. 아직 파일이 생성되진 않음.객체만 생성
 
 			try {
@@ -64,21 +69,36 @@ public class BoardServiceImpl implements BoardService {
 
 	}
 
+//	@Override
+//	public List<ProductDTO> getList() {
+//
+//		// db에서 게시물 가져오기
+//		List<Product> result = repository.findAll();
+//
+//		// 리스트 생성
+//		List<ProductDTO> list = new ArrayList<>();
+//
+//		for (int i = 0; i < result.size(); i++) {
+//			ProductDTO dto = entityToDto(result.get(i));
+//			list.add(dto);
+//		}
+//
+//		return list;
+//	}
+
 	@Override
-	public List<ProductDTO> getList() {
+	public Page<ProductDTO> getList(int pageNumber) { //pageNumber 는 화면단에서 받아온 page(int타입)을 저장할 변수
+		// 페이지 번호를 인덱스로 변경
+		int pageNum = (pageNumber == 0) ? 0 : pageNumber - 1; // pageNumber 는 화면에서 받아옴?.?
+		// pageNum(인덱스)를 전달하여 페이지번호, 개수, 정렬방식 입력하여 페이지 정보 생성
+		Pageable pageable = PageRequest.of(pageNum, 10, Sort.by("no").descending());
 
-		// db에서 게시물 가져오기
-		List<Product> result = repository.findAll();
+		// 게시물 목록 조회
+		Page<Product> entityPage = repository.findAll(pageable);
+		// map을 사용하여 엔티티 리스트를 DTO 리스트로 변환
+		Page<ProductDTO> dtoPage = entityPage.map(entity -> entityToDto(entity));
 
-		// 리스트 생성
-		List<ProductDTO> list = new ArrayList<>();
-
-		for (int i = 0; i < result.size(); i++) {
-			ProductDTO dto = entityToDto(result.get(i));
-			list.add(dto);
-		}
-
-		return list;
+		return dtoPage;
 	}
 
 	@Override

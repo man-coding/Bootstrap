@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.ProductDTO;
@@ -13,7 +14,8 @@ public interface BoardService {
 	int register(ProductDTO dto, MultipartFile file);
 
 	// 게시물 목록조회
-	List<ProductDTO> getList();
+//	List<ProductDTO> getList();
+	Page<ProductDTO> getList(int pageNumber);
 
 	// 게시물 상세조회
 	ProductDTO read(int no);
